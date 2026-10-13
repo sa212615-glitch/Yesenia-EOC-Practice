@@ -55,7 +55,15 @@ def start_session(database, mode_name):
     bank_path = Path("data/question_bank/yesenia_questions.json")
     if bank_path.exists():
         targets = [
-            SimpleNamespace(**q)
+            SimpleNamespace(
+                **{
+                    **q,
+                    "answer_choices": [
+                        SimpleNamespace(**choice) if isinstance(choice, dict) else choice
+                        for choice in q["answer_choices"]
+                    ],
+                }
+            )
             for q in json.loads(bank_path.read_text())["questions"]
         ]
     else:
