@@ -146,7 +146,7 @@ ITEM-WRITING RULES:
 11. Match the requested life-course category.
 12. Match the requested clinical setting.
 13. Explain why the correct answer is correct.
-14. Explain why every distractor is incorrect.
+14. Explain why every distractor is incorrect. Provide exactly four distractor_rationales: one for each incorrect answer choice, using its exact letter (A-E). Do not include the correct answer in distractor_rationales. Do not duplicate or omit any incorrect answer letter.
 15. Do not mention PAEA inside the generated question.
 """
 
@@ -154,6 +154,8 @@ ITEM-WRITING RULES:
 def load_targets(database="eoc"):
     if database == "catherine":
         path = BASE_DIR / "data" / "catherine.json"
+    elif database == "taylisha":
+        path = BASE_DIR / "data" / "taylisha.json"
     elif database == "yesenia":
         path = BASE_DIR / "data" / "yesenia.json"
     else:
@@ -186,7 +188,11 @@ Setting: {setting}
 Life course: {life_course}
 Cognitive level: {cognitive_level}
 
-The TASK is especially important. The lead-in must assess that task rather
+SPECIAL TASK GUIDANCE:
+For Hypocalcemia with History and Physical, do not reveal Chvostek sign or Trousseau sign in the vignette if either is the correct answer. Use symptoms and history that require clinical interpretation. Make all four incorrect choices plausible competing examination findings. Avoid unrelated distractors such as malar rash. Test recognition of characteristic symptoms or examination findings, such as perioral paresthesias, tetany, or Trousseau sign. Do not make laboratory testing the primary question.
+For Osteoarthritis with Clinical Therapeutics, test selection of appropriate evidence-based treatment based on the patient's symptoms, affected joint, and clinical circumstances. Make exactly one treatment option the best answer.
+
+For Hepatitis A with Health Maintenance, create a clinically realistic vaccination or prevention scenario. Establish a clear indication using current ACIP guidance, such as relevant travel, chronic liver disease, or another recognized risk factor. Test a meaningful preventive-care decision. Make all four incorrect choices clinically plausible and relevant to hepatitis A prevention. Avoid unrelated vaccines and obviously incorrect distractors. The TASK is especially important. The lead-in must assess that task rather
 than merely mentioning it in the metadata.
 
 Return a complete item with five answer choices, the correct answer,
