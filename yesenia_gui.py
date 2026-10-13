@@ -1,4 +1,5 @@
 import random
+from types import SimpleNamespace
 import json
 from pathlib import Path
 import streamlit as st
@@ -53,7 +54,10 @@ for key, value in defaults.items():
 def start_session(database, mode_name):
     bank_path = Path("data/question_bank/yesenia_questions.json")
     if bank_path.exists():
-        targets = json.loads(bank_path.read_text())["questions"]
+        targets = [
+            SimpleNamespace(**q)
+            for q in json.loads(bank_path.read_text())["questions"]
+        ]
     else:
         targets = load_targets(database)
     targets = targets.copy()
