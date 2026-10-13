@@ -350,7 +350,7 @@ if st.session_state.answered:
 
     for explanation in item.distractor_rationales:
         st.markdown(
-            f"**{explanation.letter}.** {explanation.explanation}"
+            f"**{(explanation.get('letter', '') if isinstance(explanation, dict) else explanation.letter)}.** {(explanation.get('explanation', '') if isinstance(explanation, dict) else explanation.explanation)}"
         )
 
     st.markdown("### Teaching Point")
